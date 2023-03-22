@@ -1,4 +1,4 @@
-package tests.neural;
+package test.neural;
 
 public class TestPerceptron {
 	
