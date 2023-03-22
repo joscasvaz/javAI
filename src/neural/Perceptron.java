@@ -83,7 +83,12 @@ public class Perceptron {
 		Perceptron other = (Perceptron) obj;
 		return Objects.equals(bias, other.bias) && Objects.equals(activation, other.activation) && Objects.equals(inputs, other.inputs);
 	}
-	
-	//TOSTRING
+
+	//toSTRING
+	@Override
+	public String toString() {
+		return "[Perceptron (inputs: " + getInputs() + ", bias: " + getBias()
+				+ ", activation: " + getActivation() + "), output: " + output() + "]";
+	}
 	
 }
