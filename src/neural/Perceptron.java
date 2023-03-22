@@ -46,44 +46,27 @@ public class Perceptron {
 	
 	//GETTERS AND SETTERS
 
-	public List<NeuralLink> getInputs() {
-		return inputs;
-	}
+	public List<NeuralLink> getInputs() { return inputs; }
 
-	public void setInputs(List<NeuralLink> inputs) {
-		this.inputs = inputs;
-	}
+	public void setInputs(List<NeuralLink> inputs) { this.inputs = inputs; }
 	
-	public List<NeuralLink> getConnections() {
-		return connections;
-	}
+	public List<NeuralLink> getConnections() { return connections; }
 
 	public void setConnections(List<NeuralLink> connections) {
-		this.connections = connections;
-	}
+		this.connections = connections; }
 
-	public Double getBias() {
-		return bias;
-	}
+	public Double getBias() { return bias; }
 
-	public void setBias(Double bias) {
-		this.bias = bias;
-	}
+	public void setBias(Double bias) { this.bias = bias; }
 
-	public DoubleUnaryOperator getActivation() {
-		return activation;
-	}
+	public DoubleUnaryOperator getActivation() { return activation; }
 
-	public void setActivation(DoubleUnaryOperator f) {
-		this.activation = f;
-	}
+	public void setActivation(DoubleUnaryOperator f) { this.activation = f; }
 	
 	//HASH AND EQUALS
 	
 	@Override
-	public int hashCode() {
-		return Objects.hash(bias, activation, inputs);
-	}
+	public int hashCode() { return Objects.hash(bias, activation, inputs); }
 
 	@Override
 	public boolean equals(Object obj) {
@@ -101,8 +84,8 @@ public class Perceptron {
 	
 	@Override
 	public String toString() {
-		return "[Perceptron (inputs: " + getInputs() + ", connections: " + getConnections() + ", bias: " + getBias()
-				+ ", activation: " + getActivation() + "), output: " + output() + "]";
+		return String.format("[Perceptron (inputs: %s, connections: %s, bias: %s, activation: %s), output: %s]",
+				getInputs(), getConnections(), getBias(), getActivation(), output());
 	}
 	
 }

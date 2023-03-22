@@ -9,7 +9,7 @@ public record NeuralLink(Perceptron source, Perceptron dest, Double weight) {
 	//toSTRING
 	
 	public String toString() {
-		return String.format("[NeuralLink: src: %s, dest: %s, weight: %s]",
+		return String.format("[NeuralLink: (src: %s, dest: %s), weight: %s]",
 				source(), dest(), weight());
 	}
 }
