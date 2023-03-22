@@ -8,7 +8,9 @@ import utils.Readers;
 
 public class TestCommonFunctions {
 	
-	private static List<List<Double>> data = Readers.readCSV("/javAI/src/test/data/inputs/utils.csv",
+    private static String inputsCommonFuntions = "C:/Users/jicas/git/javAI/src/test/data/inputs/common_functions.csv";
+	
+	private static List<List<Double>> data = Readers.readCSV(inputsCommonFuntions,
 			Parsers.parseToDouble);
 	
 	public static void main(String[] args) {
@@ -16,7 +18,6 @@ public class TestCommonFunctions {
 		for(List<Double> l:data)
 			for(Double d:l)
 				System.out.println(CommonFunctions.relu.applyAsDouble(d));
-			
 		
 	}
 }
