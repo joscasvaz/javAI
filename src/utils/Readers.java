@@ -1,6 +1,7 @@
 package utils;
 
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -8,16 +9,30 @@ import java.util.List;
 import java.util.function.Function;
 
 public class Readers {
-
-	public <T> List<T> readCSV(String path, Function<String,T> parser) throws IOException{
+	
+	public static <T> List<List<T>> readCSV(String path, Function<String,T> parser) {
 		
-		List<T> res = new ArrayList<>();
+		List<List<T>> res = new ArrayList<>();
 		
-		List<String[]> parts = Files.lines(Paths.get(path))
-				.map(s->s.split(","))
-				.toList();
+		URI p = URI.create(path);
 		
-		for(String[] part:parts) { for(String s:part) { res.add(parser.apply(s)); } }
+		List<String[]> parts = null;
+		
+		try {
+			
+			parts = Files.lines(Paths.get(p))
+					.map(s->s.split(","))
+					.toList();
+			
+		} catch (IOException e) { e.printStackTrace(); }
+		
+		for(String[] part:parts) {
+			
+			List<T> aux = new ArrayList<>();
+			for(String s:part) { aux.add(parser.apply(s)); }
+			
+			res.add(aux);
+		}
 		
 		return res;
 	}
