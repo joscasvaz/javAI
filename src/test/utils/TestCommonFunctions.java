@@ -16,8 +16,14 @@ public class TestCommonFunctions {
 	public static void main(String[] args) {
 		
 		for(List<Double> l:data)
-			for(Double d:l)
-				System.out.println(CommonFunctions.relu.applyAsDouble(d));
-		
+			for(Double d:l) {
+				
+				System.out.println(
+						String.format("Input:%s\nThreshold:%s\nSigno:%s\nRelu:%s\nSigmoid:%s\n#",
+								d, CommonFunctions.threshold.applyAsDouble(d),
+								CommonFunctions.signo.applyAsDouble(d),
+								CommonFunctions.relu.applyAsDouble(d),
+								CommonFunctions.sigmoid.applyAsDouble(d)));
+			}
 	}
 }
