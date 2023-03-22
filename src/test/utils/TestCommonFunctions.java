@@ -6,7 +6,7 @@ import utils.CommonFunctions;
 import utils.Parsers;
 import utils.Readers;
 
-public class TestUtils {
+public class TestCommonFunctions {
 	
 	private static List<List<Double>> data = Readers.readCSV("/javAI/src/test/data/inputs/utils.csv",
 			Parsers.parseToDouble);
