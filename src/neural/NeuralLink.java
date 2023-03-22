@@ -1,6 +1,7 @@
 package neural;
 
-public record NeuralLink(Double input, Double weight) {
+public record NeuralLink(Perceptron source, Perceptron dest,
+		Double input, Double weight) {
 	
 	//METHODS
 	
@@ -9,7 +10,7 @@ public record NeuralLink(Double input, Double weight) {
 	//toSTRING
 	
 	public String toString() {
-		return String.format("[NeuralLink: (input: %s, weight: %s), output: %s]",
-				input(), weight(), output());
+		return String.format("[NeuralLink: from:%s, to:%s, (input: %s, weight: %s), output: %s]",
+				source(), dest(), input(), weight(), output());
 	}
 }
