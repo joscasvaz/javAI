@@ -9,23 +9,28 @@ public class Perceptron {
 	//PROPERTIES
 	
 	private List<NeuralLink> inputs;
+	private List<NeuralLink> connections;
 	private Double bias;
 	private DoubleUnaryOperator activation;
 	
 	//CONSTRUCTORS
 	
-	public Perceptron(List<NeuralLink> inputs, Double bias, DoubleUnaryOperator f) {
+	public Perceptron(List<NeuralLink> inputs, List<NeuralLink> connections,
+			Double bias, DoubleUnaryOperator activation) {
 		
 		this.inputs = inputs;
+		this.connections = connections;
 		this.bias = bias;
-		this.activation = f;
+		this.activation = activation;
 	}
 	
-	public Perceptron(List<NeuralLink> inputs, DoubleUnaryOperator f) {
+	public Perceptron(List<NeuralLink> inputs, List<NeuralLink> connections,
+			DoubleUnaryOperator activation) {
 		
 		this.inputs = inputs;
+		this.connections = connections;
 		this.bias = 1.0;
-		this.activation = f;
+		this.activation = activation;
 	}
 	
 	//METHODS
@@ -47,6 +52,14 @@ public class Perceptron {
 
 	public void setInputs(List<NeuralLink> inputs) {
 		this.inputs = inputs;
+	}
+	
+	public List<NeuralLink> getConnections() {
+		return connections;
+	}
+
+	public void setConnections(List<NeuralLink> connections) {
+		this.connections = connections;
 	}
 
 	public Double getBias() {
@@ -85,9 +98,10 @@ public class Perceptron {
 	}
 
 	//toSTRING
+	
 	@Override
 	public String toString() {
-		return "[Perceptron (inputs: " + getInputs() + ", bias: " + getBias()
+		return "[Perceptron (inputs: " + getInputs() + ", connections: " + getConnections() + ", bias: " + getBias()
 				+ ", activation: " + getActivation() + "), output: " + output() + "]";
 	}
 	
