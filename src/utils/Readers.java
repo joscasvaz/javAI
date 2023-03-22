@@ -1,7 +1,6 @@
 package utils;
 
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -14,13 +13,11 @@ public class Readers {
 		
 		List<List<T>> res = new ArrayList<>();
 		
-		URI p = URI.create(path);
-		
 		List<String[]> parts = null;
 		
 		try {
 			
-			parts = Files.lines(Paths.get(p))
+			parts = Files.lines(Paths.get(path))
 					.map(s->s.split(","))
 					.toList();
 			
