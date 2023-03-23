@@ -1,5 +1,6 @@
 package neural;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.DoubleUnaryOperator;
@@ -11,7 +12,8 @@ public class Perceptron {
 	private List<NeuralLink> inputs;
 	private List<NeuralLink> connections;
 	private Double bias;
-	private DoubleUnaryOperator activation;
+	private static DoubleUnaryOperator activation;
+	private Double output;
 	
 	//CONSTRUCTORS
 	
@@ -21,7 +23,8 @@ public class Perceptron {
 		this.inputs = inputs;
 		this.connections = connections;
 		this.bias = bias;
-		this.activation = activation;
+		Perceptron.activation = activation;
+		this.output = output();
 	}
 	
 	public Perceptron(List<NeuralLink> inputs, List<NeuralLink> connections,
@@ -30,16 +33,52 @@ public class Perceptron {
 		this.inputs = inputs;
 		this.connections = connections;
 		this.bias = 1.0;
-		this.activation = activation;
+		Perceptron.activation = activation;
+		this.output = output();
+	}
+	
+	public Perceptron(List<Double> values, List<Double> weights, List<NeuralLink> connections,
+			DoubleUnaryOperator activation) throws Exception {
+		
+		this.connections = connections;
+		this.bias = 1.0;
+		Perceptron.activation = activation;
+		this.output = output(calculateInputs(values, weights));
 	}
 	
 	//METHODS
+	
+	private static Double calculateInput(Double value, Double weight) {
+		return value * weight; }
+	
+	private static List<Double> calculateInputs(List<Double> values, List<Double> weights)
+			throws Exception {
+		
+		if(values.size() == weights.size()) {
+			
+			List<Double> res = new ArrayList<>();
+			
+			for(int i = 0; i < values.size(); i++) {
+				res.add(calculateInput(values.get(i), weights.get(i))); }
+			
+			return res;
+			
+		} else throw new Exception("Lists size is different");
+	}
 	
 	public Double output() {
 		
 		Double sum = getInputs().stream()
 				.mapToDouble(NeuralLink::output)
 				.sum();
+		
+		return getActivation().applyAsDouble(sum);
+	}
+	
+	public Double output(List<Double> inputs) {
+		Double sum = inputs.stream()
+				.reduce((x, y) -> x + y)
+				.get();
 		
 		return getActivation().applyAsDouble(sum);
 	}
@@ -59,9 +98,11 @@ public class Perceptron {
 
 	public void setBias(Double bias) { this.bias = bias; }
 
-	public DoubleUnaryOperator getActivation() { return activation; }
+	public static DoubleUnaryOperator getActivation() { return activation; }
 
-	public void setActivation(DoubleUnaryOperator f) { this.activation = f; }
+	public void setActivation(DoubleUnaryOperator f) { Perceptron.activation = f; }
+	
+	public Double getOutput() { return output; }
 	
 	//HASH AND EQUALS
 	
@@ -77,7 +118,7 @@ public class Perceptron {
 		if (getClass() != obj.getClass())
 			return false;
 		Perceptron other = (Perceptron) obj;
-		return Objects.equals(bias, other.bias) && Objects.equals(activation, other.activation) && Objects.equals(inputs, other.inputs);
+		return Objects.equals(bias, other.bias) && Objects.equals(activation, Perceptron.activation) && Objects.equals(inputs, other.inputs);
 	}
 
 	//toSTRING
