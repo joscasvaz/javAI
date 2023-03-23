@@ -26,7 +26,7 @@ public class Readers {
 		for(String[] part:parts) {
 			
 			List<T> aux = new ArrayList<>();
-			for(String s:part) { aux.add(parser.apply(s)); }
+			for(String s:part) { aux.add(parser.apply(s.trim())); }
 			
 			res.add(aux);
 		}
