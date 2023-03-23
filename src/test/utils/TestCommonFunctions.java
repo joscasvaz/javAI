@@ -21,7 +21,7 @@ public class TestCommonFunctions {
 				System.out.println(
 						String.format("Input:%s\nThreshold:%s\nSigno:%s\nRelu:%s\nSigmoid:%s\n#",
 								d, CommonFunctions.threshold.applyAsDouble(d),
-								CommonFunctions.signo.applyAsDouble(d),
+								CommonFunctions.sig.applyAsDouble(d),
 								CommonFunctions.relu.applyAsDouble(d),
 								CommonFunctions.sigmoid.applyAsDouble(d)));
 			}
