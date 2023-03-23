@@ -71,14 +71,17 @@ public class Perceptron {
 		Double sum = getInputs().stream()
 				.mapToDouble(NeuralLink::output)
 				.sum();
+		sum += this.getBias();
 		
 		return getActivation().applyAsDouble(sum);
 	}
 	
 	public Double output(List<Double> inputs) {
+		
 		Double sum = inputs.stream()
 				.reduce((x, y) -> x + y)
 				.get();
+		sum += this.getBias();
 		
 		return getActivation().applyAsDouble(sum);
 	}
