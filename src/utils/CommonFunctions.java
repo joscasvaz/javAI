@@ -1,5 +1,6 @@
 package utils;
 
+import java.util.List;
 import java.util.function.DoubleUnaryOperator;
 
 public class CommonFunctions {
@@ -11,5 +12,30 @@ public class CommonFunctions {
 	public static DoubleUnaryOperator tanh = z ->{
 		Double ez = Math.pow(Math.E, z);
 		return (ez - 1 / ez) / (ez + 1 / ez); };
+	
+	public static Double mse(List<Integer> realValues, List<Integer> calculatedValues) throws Exception {
+		
+		Double size = Double.valueOf(realValues.size());
+		
+		if(size == calculatedValues.size()) {
+			
+			Double res = .0;
+			
+			for(int i = 0; i < size; i++)
+				res += Math.pow(realValues.get(i) - calculatedValues.get(i), 2);
+			
+			return res / size;
+			
+		} else throw new Exception("Lists size is different");
+	}
+	
+	public static Double diff(Double x, DoubleUnaryOperator f) {
+		
+		Double h = Double.MIN_VALUE;
+	    Double fx = f.applyAsDouble(x);
+	    Double fxh = f.applyAsDouble(x + h);
+	    
+	    return (fxh - fx) / h;
+	}
 	
 }
